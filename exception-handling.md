@@ -1,13 +1,13 @@
 # Java Exceptions – Full Guide
 
-## 📘 What is an Exception?
+## What is an Exception?
 
 An **Exception** in Java is an **unwanted or unexpected event** that disrupts the normal flow of the program during execution.
 
 > All exceptions are objects in Java, instances of classes derived from `java.lang.Throwable`.
 
 
-## 🧭 Throwable Hierarchy
+## Throwable Hierarchy
 
 ```
 java.lang.Object
@@ -18,7 +18,7 @@ java.lang.Object
 ```
 
 
-## 🎯 Types of Exceptions
+## Types of Exceptions
 
 ### 1. **Checked Exceptions**
 
@@ -42,7 +42,7 @@ java.lang.Object
   * `ArithmeticException`
 
 
-## 🧪 Common Java Exceptions
+## Common Java Exceptions
 
 | Exception                        | Type      | Cause                                  |
 | -------------------------------- | --------- | -------------------------------------- |
@@ -56,7 +56,7 @@ java.lang.Object
 | `SQLException`                   | Checked   | SQL operation failed                   |
 
 
-## 🛠️ Exception Handling Keywords
+## Exception Handling Keywords
 
 ### 1. `try`
 
@@ -102,7 +102,7 @@ public void readFile() throws IOException {
 }
 ```
 
-## 🎨 Custom Exceptions
+## Custom Exceptions
 
 You can create your own exception class by extending `Exception` or `RuntimeException`.
 
@@ -121,7 +121,7 @@ throw new MyException("Custom error occurred!");
 ```
 
 
-## 🔁 Catching Multiple Exceptions
+## Catching Multiple Exceptions
 
 ### Option 1: Multiple `catch` blocks
 
@@ -144,7 +144,7 @@ catch (IOException | SQLException e) {
 ```
 
 
-## 🧱 Best Practices
+## Best Practices
 
 * Don’t catch `Exception` or `Throwable` unless absolutely necessary.
 * Use specific exception types.
@@ -153,7 +153,7 @@ catch (IOException | SQLException e) {
 * Use custom exceptions for domain-specific errors.
 
 
-## 🔧 Try-with-Resources (Java 7+)
+## Try-with-Resources (Java 7+)
 
 - Automatically closes resources that implement `AutoCloseable`.
 
@@ -178,7 +178,7 @@ try (ResourceType name = new ResourceType()) {
 ```
 
 
-### 📦 Example: Reading a File
+### Example: Reading a File
 
 ```java
 import java.io.*;
@@ -221,6 +221,6 @@ try (
 }
 ```
 
-## 📚 Conclusion
+## Conclusion
 
 Java provides a robust and flexible mechanism for handling both expected and unexpected events during program execution. Mastering exceptions helps create clean, resilient, and maintainable applications.

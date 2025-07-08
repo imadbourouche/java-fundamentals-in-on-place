@@ -1,6 +1,6 @@
 # Static vs Dynamic Binding
 
-## 🔗 What is Binding?
+## What is Binding?
 
 **Binding** refers to the process of associating a method call with its corresponding method body. In Java, this association can occur at two different times:
 
@@ -10,24 +10,24 @@
 
 ## ⚡ Static Binding (Early Binding)
 
-### ✅ Definition
+### Definition
 
 Static Binding happens at **compile time**. The compiler determines the method to invoke based on the reference type and method signature.
 
-### 🧠 When Does Static Binding Occur?
+### When Does Static Binding Occur?
 
 - **Method Overloading**
 - **Static Methods**
 - **Final Methods**
 - **Private Methods**
 
-### 📌 Key Characteristics
+### Key Characteristics
 
 - Faster execution due to compile-time resolution.
 - Does **not** support polymorphism.
 - Determined by **reference type**, not object type.
 
-### 📦 Example: Method Overloading
+### Example: Method Overloading
 
 ```java
 class Printer {
@@ -53,24 +53,24 @@ In this example, the method to invoke is determined at compile time based on the
 
 ---
 
-## 🔄 Dynamic Binding (Late Binding)
+## Dynamic Binding (Late Binding)
 
-### ✅ Definition
+### Definition
 
 Dynamic Binding occurs at **runtime**. The JVM determines the method to invoke based on the **actual object**, not the reference type.
 
-### 🧠 When Does Dynamic Binding Occur?
+### When Does Dynamic Binding Occur?
 
 * **Method Overriding**
 * With **non-static**, **non-final**, and **non-private** instance methods.
 
-### 📌 Key Characteristics
+### Key Characteristics
 
 * Supports **runtime polymorphism**.
 * Slightly slower due to runtime resolution.
 * Determined by **object type**, not reference type.
 
-### 📦 Example: Method Overriding
+### Example: Method Overriding
 
 ```java
 class Animal {
@@ -101,7 +101,7 @@ Here, `animal.sound()` is resolved at compile time, while `animalDog.sound()` is
 
 ---
 
-## 🎯 Mixed Example: Overloading and Overriding
+## Mixed Example: Overloading and Overriding
 
 ```java
 class Animal {
@@ -166,7 +166,7 @@ boldogAsAnimal.sound(); // Calls Dog.sound() (Dynamic - inherited)
 ```
 
 
-## 🧠 Additional notes
+## Additional notes
 
 * **Constructors** are always statically bound.
 * **Static methods** are bound using the **reference type**, even if overridden.
