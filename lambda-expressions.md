@@ -141,13 +141,6 @@ Collections.sort(names, (a, b) -> a.compareToIgnoreCase(b));
 ```
 
 
-```java
-List<String> names = Arrays.asList("Imad", "boualam", "yacine");
-names.forEach(name -> System.out.println(name));
-// forEach is a method from the Iterable<T> interface. It accepts a Consumer<T> as its parameter.
-// void forEach(Consumer<? super T> action)
-```
-
 ## Method References
 
 Shorter form of lambda when calling existing methods.
