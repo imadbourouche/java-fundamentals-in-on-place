@@ -10,3 +10,4 @@ This README covers **Java fundamentals** with detailed explanations and practica
 - [Static/Dynamic binding](static-dynamic-binding.md)
 - [Exception handling](exception-handling.md)
 - [Lambda expressions](lambda-expressions.md)
+- [Annotations](annotations.md)
