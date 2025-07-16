@@ -11,3 +11,4 @@ This README covers **Java fundamentals** with detailed explanations and practica
 - [Exception handling](exception-handling.md)
 - [Lambda expressions](lambda-expressions.md)
 - [Annotations](annotations.md)
+- [Modules](modules.md)
