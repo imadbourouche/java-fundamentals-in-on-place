@@ -12,3 +12,4 @@ This README covers **Java fundamentals** with detailed explanations and practica
 - [Lambda expressions](lambda-expressions.md)
 - [Annotations](annotations.md)
 - [Modules](modules.md)
+- [Optionals](optionals.md)
