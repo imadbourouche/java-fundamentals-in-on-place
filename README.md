@@ -13,3 +13,4 @@ This README covers **Java fundamentals** with detailed explanations and practica
 - [Annotations](annotations.md)
 - [Modules](modules.md)
 - [Optionals](optionals.md)
+- [Dependency Injection](dependency-injection.md)
