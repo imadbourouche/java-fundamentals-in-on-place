@@ -22,15 +22,6 @@ java MyProgram
 
 ## 2. Java Class File Structure
 
-
-Excellent! This is a great start for your JVM internals documentation. Your structure is correct. Let's fill in the descriptions and add a few more critical details to make it more comprehensive.
-
-Here is the enhanced and corrected version:
-
----
-
-## The Structure of a Java .class File
-
 A compiled Java `.class` file is a precisely formatted binary stream, not a simple text file. Its structure is defined by the JVM specification. Understanding this structure is key to understanding how the JVM loads and executes code.
 
 - illustration of .class structure
@@ -60,8 +51,6 @@ A compiled Java `.class` file is a precisely formatted binary stream, not a simp
 | JDK       | JRE + development tools (javac, jar, javadoc). |
 
 ## 4. Class Loading
-
-### How Classes are Loaded
 
 To execute this bytecode the JVM must have this class and this is where the role of the class loader comes in to load classes into memory. The JVM doesn’t load all classes at once. It’s smarter than that. Classes are loaded only when needed. The process is handled by different types of ClassLoaders:
 
@@ -122,23 +111,7 @@ public class ClassLoaderTest {
 
 ### Compilers
 
-* **JIT (Just-In-Time)**: compiles bytecode to native machine code during runtime.
-* **AOT (Ahead-of-Time)**: compiles bytecode to native code before execution.
-
-```java
-public class JitDemo {
-    public static void main(String[] args) {
-        for (int i = 0; i < 100000; i++) hotMethod();
-    }
-
-    public static void hotMethod() {
-        int x = 5 * 10;
-    }
-}
-```
-
-Run and observe **JIT optimizations** (hot code compiled after multiple runs).
-
+- [compilers](./3-compilers.md)
 
 ## 7. Memory Management
 
@@ -156,9 +129,3 @@ Run and observe **JIT optimizations** (hot code compiled after multiple runs).
 * Virtual threads (Project Loom) allow **millions of lightweight threads**.
 * Use `volatile` for memory visibility.
 * Synchronization needed for **shared memory** access.
-
-```java
-synchronized void increment() {
-    count++;
-}
-```
