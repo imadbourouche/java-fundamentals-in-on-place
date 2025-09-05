@@ -2,6 +2,18 @@
 
 This document explains the Java Virtual Machine (JVM), its architecture, memory model, and key concepts. It includes examples and small code snippets to help understand the inner workings of Java.
 
+
+## Table of Contents
+1. [Java program lifecycle](#1-java-program-lifecycle)
+2. [The .class file structure](#2-java-class-file-structure)
+3. [JVM vs JDK vs JRE](#3-jvm-vs-jre-vs-jdk)
+4. [Class loading](#4-class-loading)
+5. [Before Execution Phase](#5-before-execution-phases)
+6. [Bytecode Execution](#6-bytecode-execution)
+7. [The Java Memory Model](#6-memory-model)
+8. [The garbage collector](#8-garbage-collection-gc)
+9. [Diagram resume](#resume)
+
 ## 1. Java Program Lifecycle
 
 Before running a Java program:
@@ -19,6 +31,7 @@ java MyProgram
 ```
 .java → .class → bytecode → JVM → native machine code
 ```
+
 
 ## 2. Java Class File Structure
 
@@ -50,6 +63,9 @@ A compiled Java `.class` file is a precisely formatted binary stream, not a simp
 | JRE       | JVM + runtime libraries (enables execution of Java programs).      |
 | JDK       | JRE + development tools (javac, jar, javadoc). |
 
+![jvm-jdk-jre](./images/jvm-jdk-jre.png)
+
+
 ## 4. Class Loading
 
 To execute this bytecode the JVM must have this class and this is where the role of the class loader comes in to load classes into memory. The JVM doesn’t load all classes at once. It’s smarter than that. Classes are loaded only when needed. The process is handled by different types of ClassLoaders:
@@ -57,30 +73,50 @@ To execute this bytecode the JVM must have this class and this is where the role
 | Loader     | Responsibility                              |
 | ---------- | ------------------------------------------- |
 | Bootstrap  | Loads core Java classes (`java.*`)          |
-| Platform   | Loads JDK extensions (`$JAVA_HOME/lib/ext`) |
+| Platform   | Loads platform modules i.e., modules that are part of the JDK but not in the bootstrap module |
 | System/App | Loads classes from app classpath            |
 | Custom     | User-defined dynamic loading                |
 
-Class Loader Flow follow the delegation model
 
-1. Request to load class
-2. Parent class loader tries first
-3. If not found, child loader attempts
-4. Throws `ClassNotFoundException` if class not found
+### The Java Class Loader Delegation Model
+Class Loader Flow follow the **delegation model**. The delegation model is a hierarchical, parent-first loading strategy designed for security, preventing duplicate loading, and maintaining Java's namespace isolation.
+
+1. Check if Already Loaded: The class loader first checks its own cache (namespace) to see if it has already loaded this class. If yes, it returns the existing Class object. This prevents the same class from being loaded multiple times.
+
+2. Delegate to Parent: If the class is not already loaded, the class loader does not immediately try to load it itself. Instead, it delegates the search request to its parent class loader.
+
+3. Recursive Delegation: This delegation continues recursively up the chain until it reaches the Bootstrap Class Loader.
+
+4. Parent Attempts to Load:
+   - If any parent class loader (Bootstrap -> Platform -> System) succeeds in finding and loading the class, it returns the Class object.
+   - The original child class loader never attempts to load this class; it simply uses the result from the parent.
+
+5. Child Loads as Fallback: Only if all parent class loaders in the hierarchy fail to find the class (they throw a ClassNotFoundException), the original child class loader then attempts to find and load the class from its own source (e.g., from its assigned directory or JAR file).
+
+6. Final Exception: If the child class loader also cannot find the class definition, it finally throws a ClassNotFoundException.
+
 
 Example of inspecting class loader:
 
 ```java
-public class ClassLoaderTest {
+public class Test {
     public static void main(String[] args) {
-        System.out.println(java.util.HashMap.class.getClassLoader()); // null → bootstrap
-        System.out.println(sun.net.spi.nameservice.dns.DNSNameService.class.getClassLoader()); // ExtClassLoader
-        System.out.println(ClassLoaderTest.class.getClassLoader()); // AppClassLoader
+        System.out.println("This is main method from test");
+        System.out.println("Showing class loaders types: ");
+
+        // Bootstrap Class Loader (returns null)
+        System.out.println("  - Classloader of HashMap (Bootstrap): " + java.util.HashMap.class.getClassLoader()); 
+
+        // This will be the Application (System) Class Loader
+        System.out.println("  - Classloader of this Test class: " + Test.class.getClassLoader()); 
+        
+        // The parent of the Application Class Loader is the Platform Class loader
+        System.out.println("  - Parent of Test's classloader: " + Test.class.getClassLoader().getParent()); 
     }
 }
 ```
 
-## 5. JVM Execution Phases
+## 5. Before Execution Phases
 
 ### Loading
 
@@ -96,11 +132,9 @@ public class ClassLoaderTest {
 ### Initialization
 
 * Executes static initializers (`static { ... }`) and `static` fields.
-* Triggered when:
-
+* The class initializtion is triggered when:
   * An instance is created (`new`)
   * Accessing static field/method
-
 
 ## 6. Bytecode Execution
 
@@ -113,7 +147,7 @@ public class ClassLoaderTest {
 
 - [compilers](./3-compilers.md)
 
-## 7. Memory Management
+## 7. Memory Model
 
 - [jvm-memory-model](./jvm-memory-model.md)
 
@@ -122,10 +156,5 @@ public class ClassLoaderTest {
 
 - [garbage-collector](./garbage-collector.md)
 
-## 9. Threads in JVM
-
-* Java threads map to OS threads.
-* Each thread has its own **stack**.
-* Virtual threads (Project Loom) allow **millions of lightweight threads**.
-* Use `volatile` for memory visibility.
-* Synchronization needed for **shared memory** access.
+## Resume
+![mermaid](./images/mermaid_jvm.png)
