@@ -71,7 +71,3 @@ see
 ## 5. The Java Memory Model (JMM) for Concurrency
 
 The Java Memory Model (JMM) is a **formal specification** that defines how threads interact through memory. It's not the same as the physical memory structure (Heap, Stack, etc.). The JMM's primary goal is to define the conditions under which a write by one thread becomes visible to another thread.
-
-**The Core Problem:**
-*   Modern architectures have CPU caches and registers for performance. A variable's value might be stored in a thread's local cache and not be immediately visible to other threads.
-*   Compilers and CPUs can reorder instructions for optimization, which can break intuitive assumptions about code execution order in a multi-threaded context.
