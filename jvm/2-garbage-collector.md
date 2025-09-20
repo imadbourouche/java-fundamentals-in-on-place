@@ -2,6 +2,30 @@
 
 Garbage Collection (GC) in Java is the process of **automatically managing memory** by reclaiming objects that are no longer referenced by a program. This frees developers from manual memory allocation/deallocation (like in C/C++), reduces memory leaks, and prevents dangling pointers.
 
+# Table of Contents
+
+1. [Garbage Collection (GC)](#garbage-collection-gc)
+   1. [How Garbage Collection Works](#how-garbage-collection-works)  
+      - [Mark and Sweep (Core Algorithm)](#mark-and-sweep-core-algorithm)  
+   2. [JVM Memory Model & Generations](#jvm-memory-model--generations)  
+   3. [Garbage Collectors in Java](#garbage-collectors-in-java)  
+      - [Serial Garbage Collector](#1-serial-garbage-collector)  
+      - [Parallel Garbage Collector (Throughput Collector)](#2-parallel-garbage-collector-throughput-collector)  
+      - [G1 Garbage Collector (Default since Java 9)](#3-g1-garbage-collector-default-since-java-9)  
+      - [Z Garbage Collector (ZGC)](#4-z-garbage-collector-zgc)  
+   4. [Choosing the Right GC](#choosing-the-right-gc)  
+   5. [GC Tuning Examples](#gc-tuning-examples)  
+      - [Common JVM Options](#common-jvm-options)  
+      - [G1GC Tuning](#g1gc-tuning)  
+      - [Parallel GC Tuning](#parallel-gc-tuning)  
+      - [ZGC Tuning](#zgc-tuning)  
+   6. [Monitoring & Analyzing GC](#monitoring--analyzing-gc)  
+      - [General Monitoring Flags](#general-monitoring-flags)  
+      - [Tools](#tools)  
+   7. [Pros & Cons of GC in General](#pros--cons-of-gc-in-general)  
+   8. [Tips & Best Practices](#tips--best-practices)
+   9. [References](#references)
+
 ## How Garbage Collection Works
 
 ### Mark and Sweep (Core Algorithm)
